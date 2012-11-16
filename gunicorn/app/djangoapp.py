@@ -91,6 +91,10 @@ class DjangoApplication(Application):
 
 
     def load(self):
+        #workaround for pythonpath bug
+        project_path = self.cfg.pythonpath
+        pythonpath, project_name = os.path.split(project_path)
+        self.cfg.set("pythonpath", pythonpath)
         # set settings
         make_default_env(self.cfg)
 
